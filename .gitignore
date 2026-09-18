@@ -1,0 +1,68 @@
+# ============ ESP-IDF / 嵌入式构建产物 ============
+build/
+build_out/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+*.elf
+*.bin
+*.map
+*.hex
+*.o
+*.d
+*.a
+
+# ============ 平台 IO / 烧录产物 ============
+flash_args
+*.uf2
+*.img
+ota_*.bin
+
+# ============ 角色资产（体积大 / 含 IP 授权素材，勿入库）============
+assets/raw/
+assets/_unlicensed/
+*.psd
+*.aseprite
+*.mp3
+*.wav
+*.ogg
+*.charpkg
+
+# ============ 敏感信息 ============
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.env
+.env
+.env.*
+*.token
+credentials.json
+
+# ============ 内部规划文档（成本/定价/IP策略，禁止入库）============
+DESIGN.INTERNAL.md
+*.INTERNAL.md
+INTERNAL/
+COSTING.md
+PRICING.md
+
+# ============ IDE / 编辑器 ============
+.vscode/
+.idea/
+*.code-workspace
+.cache/
+.clangd
+.compile_commands*.json
+
+# ============ 操作系统 ============
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ============ 日志 / 临时 ============
+*.log
+*.tmp
+tmp/
+dist/
+node_modules/
