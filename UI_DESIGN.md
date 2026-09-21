@@ -279,3 +279,8 @@
 > 最后一条是整个 UI 规范与"柄图文化"的接口：
 > **每一帧动画都要能通过"截图检验"——随手一按就是一张值得收藏的图。**
 > 做不到这一点的动画，无论多流畅都不该存在。
+
+---
+
+*文档版本：**v0.4** | 最后更新：**2026-09-18** | 状态：规划阶段（动效参数需真机校准）*
+*关联：[DESIGN.md](./DESIGN.md) · [HARDWARE.md](./HARDWARE.md) · [FEATURES.md](./FEATURES.md) · [INDUSTRIAL_DESIGN.md](./INDUSTRIAL_DESIGN.md) · [变更日志](./CHANGELOG.md)*

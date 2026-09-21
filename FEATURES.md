@@ -256,3 +256,8 @@
 > 第 8、10 项是**吧唧定位是否成立的终极判据**。
 > 如果用户把她类比成"电子玩具"而不是"周边/谷子"，说明外观或内容出了问题，
 > 再高的帧率也救不了产品定位 —— 这条比任何技术指标都重要。
+
+---
+
+*文档版本：**v0.4** | 最后更新：**2026-09-18** | 状态：规划阶段*
+*关联：[DESIGN.md](./DESIGN.md) · [HARDWARE.md](./HARDWARE.md) · [UI_DESIGN.md](./UI_DESIGN.md) · [INDUSTRIAL_DESIGN.md](./INDUSTRIAL_DESIGN.md) · [变更日志](./CHANGELOG.md)*

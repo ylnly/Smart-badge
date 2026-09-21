@@ -381,3 +381,8 @@ ESP32-S3 内置 14 通道电容触摸 → **零额外 BOM**。
 | 4 | 触摸环 or 降级为轻拍 | 玻璃公差要求、引脚 | 触摸预研之后 |
 | 5 | 扬声器口径 | 音腔结构、径向布局 | 实验 F 之后 |
 | 6 | NFC 进 P0 还是 P1 | 是否必须首发即有验真 | 商业侧决策 |
+
+---
+
+*文档版本：**v0.4** | 最后更新：**2026-09-18** | 状态：规划阶段（屏幕选型待 Phase 1 实测定案）*
+*关联：[DESIGN.md](./DESIGN.md) · [FEATURES.md](./FEATURES.md) · [UI_DESIGN.md](./UI_DESIGN.md) · [INDUSTRIAL_DESIGN.md](./INDUSTRIAL_DESIGN.md) · [变更日志](./CHANGELOG.md)*

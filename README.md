@@ -48,6 +48,7 @@
 | [FEATURES.md](./FEATURES.md) | P0/P1/P2 功能规格、隐藏依赖、场景剧本、**不做清单**、活感盲测验收表 |
 | [UI_DESIGN.md](./UI_DESIGN.md) | 圆形栅格与安全区、构图基准、14 层 Z 序与脏区预算、动效物理参数、系统状态的角色化隐喻、禁则 |
 | [INDUSTRIAL_DESIGN.md](./INDUSTRIAL_DESIGN.md) | 尺寸与三视图、厚度堆叠与重量预算、CMF、佩戴结构、配件生态、包装、可靠性与安规、打样顺序 |
+| [CHANGELOG.md](./CHANGELOG.md) | **变更日志** —— 各版本的决策与修正记录（当前 v0.4 · 2026-09-18） |
 
 ## 📦 关于角色素材
 
