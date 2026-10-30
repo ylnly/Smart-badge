@@ -5,6 +5,17 @@
 
 ---
 
+## [未发布] — 2026-10-30
+
+### 新增
+- **`VOICE_INTERACTION.md`（语音交互规格，权威）**：以 `ESP32-S3 智能角色语音交互项目开发提示词 V2.0（本地 TTS 版）` 为唯一事实来源，确立 **本地 ASR（FunASR Paraformer）+ 云端 LLM + 本地 TTS（CosyVoice 3.0）** 架构、ESP32-S3-Touch-LCD-1.85B 固件、角色卡系统、WebSocket 协议与七阶段开发顺序。
+
+### 变更
+- 语音子系统由 `PROJECT.md` V3.0 的 **云端实时语音（qwen-audio-3.0-realtime-plus）** 方案修订为 **本地 ASR + 本地 TTS**（仅 LLM 走云端）；`PROJECT.md` §3.2 与 M1 标注为「已弃用 / 待重新基线化」并交叉引用 `VOICE_INTERACTION.md`。
+- `README.md` 开发路线 P4 与文档索引同步更新；`DESIGN.md` §7.2 联网增值改为本地 ASR / 本地 TTS 表述。
+
+---
+
 ## v0.4 — 2026-09-18
 
 ### 新增

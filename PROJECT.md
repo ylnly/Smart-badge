@@ -2,7 +2,7 @@
 
 > **版本**：V3.0（重构版） ｜ **编制日期**：2026-10-21 ｜ **仓库**：[github.com/ylnly/Smart-badge](https://github.com/ylnly/Smart-badge)
 > **硬件平台**：ESP32-S3-Touch-LCD-1.85B（360×360 QSPI 屏）
-> **语音方案**：qwen-audio-3.0-realtime-plus（云端实时语音）
+> **语音方案**：**本地 ASR（FunASR）+ 云端 LLM + 本地 TTS（CosyVoice）** —— 详见 [`VOICE_INTERACTION.md`](./VOICE_INTERACTION.md)（已取代下方 §3.2 的云端实时语音规划）
 
 ## 文档定位
 
@@ -130,7 +130,9 @@
 
 ### M1 语音模型接入与音色配置
 
-**定位**：不训练本地声学模型，基于目标角色语言数据集与台词，通过 Qwen-Audio Realtime API 完成音色克隆与人设注入。
+> ⚠️ M1 原按「qwen-audio 云端实时语音」规划，已被 [`VOICE_INTERACTION.md`](./VOICE_INTERACTION.md) 的本地 ASR/TTS 架构取代，需按新架构重新基线化（本地 FunASR + 本地 CosyVoice）。
+
+**原定位（已弃用）**：基于目标角色语言数据集与台词，通过 Qwen-Audio Realtime API 完成音色克隆与人设注入；**现按 [`VOICE_INTERACTION.md`](./VOICE_INTERACTION.md) 的本地 ASR/TTS 架构重新规划。**
 **下游交接物**：音频格式契约（16k/24k）、会话事件流（含 ASR 文本结果）、`character.json`。
 
 #### T1.1 数据集清洗与克隆准备

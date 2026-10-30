@@ -423,11 +423,13 @@ void render_frame() {
 
 | 能力 | 实现方式 | 说明 |
 |------|----------|------|
-| 自由对话 | WiFi → LLM API | WebSocket 连接大模型 |
-| 语音理解 | 云端流式 ASR | 更准确的自然语言输入 |
+| 自由对话 | WiFi → 云端 LLM API | 文本生成，语音经本地 TTS 合成 |
+| 语音理解 | **本地 ASR（FunASR Paraformer）** | 端侧中文识别，仅 LLM 走云端 |
 | 个性定制 | 服务器角色 Prompt | 多角色、多性格在线切换 |
 | 长记忆 | 云端向量存储 | 记住之前聊过什么 |
 | OTA 更新 | WiFi | 新角色/新动画/固件热更新 |
+
+> 🎙️ 语音子系统的权威架构（本地 ASR + 云端 LLM + 本地 TTS）与开发顺序见 [`VOICE_INTERACTION.md`](./VOICE_INTERACTION.md)，本节仅描述产品层的联网增值能力。
 
 ### 7.3 离线↔联网无缝切换架构
 

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Badge · AI 智能吧唧 · 项目汇报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Baloo+2:wght@500;700;800&family=Mochiy+Pop+One&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --pink:#ff8fc7; --lav:#b89cff; --mint:#79e6c3; --sky:#7ec8ff;
+    --cream:#fff6fb; --ink:#4a3f5e; --ink-soft:#7b6f8e;
+    --card:#ffffff; --radius:26px;
+    --shadow:0 14px 40px rgba(150,110,200,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Baloo 2","ZCOOL KuaiLe","Segoe UI",system-ui,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(135deg,#ffe3f1 0%,#e9e2ff 45%,#d8f1ff 100%);
+    background-attachment:fixed; line-height:1.7; overflow-x:hidden;
+  }
+  .deco{position:fixed;pointer-events:none;z-index:0;opacity:.55;font-size:26px;animation:float 9s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-22px) rotate(12deg)}}
+
+  nav{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 26px;margin:14px auto;max-width:1140px;
+    background:rgba(255,255,255,.55);backdrop-filter:blur(14px);
+    border-radius:999px;box-shadow:0 8px 26px rgba(150,110,200,.16);border:2px solid rgba(255,255,255,.7);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:"ZCOOL KuaiLe";font-size:22px;color:var(--ink)}
+  .brand .dot{width:30px;height:30px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,#fff,var(--pink) 60%,var(--lav));
+    box-shadow:0 0 0 4px rgba(255,255,255,.6),0 4px 10px rgba(150,110,200,.4)}
+  nav .links{display:flex;gap:8px;align-items:center}
+  nav a{text-decoration:none;color:var(--ink-soft);font-weight:700;padding:6px 12px;border-radius:999px;transition:.25s;font-size:14px}
+  nav a:hover{background:rgba(255,143,199,.18);color:var(--ink)}
+  .lang-btn{cursor:pointer;border:none;font-family:"Baloo 2";font-weight:800;
+    background:linear-gradient(120deg,var(--pink),var(--lav));color:#fff;
+    padding:8px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(184,156,255,.5);transition:.25s}
+  .lang-btn:hover{transform:translateY(-2px) scale(1.04)}
+
+  section{max-width:1140px;margin:0 auto;padding:64px 24px;position:relative;z-index:1}
+  .eyebrow{display:inline-block;font-family:"Mochiy Pop One";font-size:13px;letter-spacing:1px;
+    color:#fff;background:linear-gradient(120deg,var(--mint),var(--sky));padding:5px 14px;border-radius:999px;margin-bottom:14px}
+  h2{font-family:"ZCOOL KuaiLe";font-size:clamp(28px,4vw,42px);line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--ink-soft);font-weight:600;margin-bottom:34px;max-width:720px}
+
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding-top:30px}
+  .hero h1{font-family:"ZCOOL KuaiLe";font-size:clamp(36px,6vw,62px);line-height:1.1;
+    background:linear-gradient(120deg,var(--pink),var(--lav) 55%,var(--sky));
+    -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+  .hero p.lead{font-size:19px;color:var(--ink-soft);font-weight:600;margin-bottom:24px}
+  .chips{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+  .chip{background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;box-shadow:var(--shadow);
+    border:2px solid rgba(255,255,255,.8);display:flex;align-items:center;gap:8px}
+  .chip b{font-size:18px;background:linear-gradient(120deg,var(--pink),var(--lav));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cta{display:inline-flex;gap:12px;flex-wrap:wrap}
+  .btn{cursor:pointer;text-decoration:none;font-family:"Baloo 2";font-weight:800;border:none;
+    padding:14px 26px;border-radius:999px;font-size:16px;transition:.25s}
+  .btn.primary{background:linear-gradient(120deg,var(--pink),var(--lav));color:#fff;box-shadow:0 10px 24px rgba(184,156,255,.55)}
+  .btn.ghost{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+  .btn:hover{transform:translateY(-3px)}
+  .mascot{display:flex;justify-content:center;align-items:center}
+  .mascot svg{width:min(320px,80%);height:auto;filter:drop-shadow(0 18px 30px rgba(150,110,200,.35));animation:bob 5s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+  .grid{display:grid;gap:22px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+    border:2px solid rgba(255,255,255,.85);transition:.3s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(150,110,200,.28)}
+  .card .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:26px;margin-bottom:14px;
+    background:linear-gradient(120deg,var(--pink),var(--lav));box-shadow:0 8px 18px rgba(184,156,255,.45)}
+  .card h3{font-family:"ZCOOL KuaiLe";font-size:22px;margin-bottom:8px}
+  .card p{color:var(--ink-soft);font-weight:600;font-size:15px}
+  .kpi{text-align:center;padding:26px 14px}
+  .kpi .num{font-family:"Baloo 2";font-weight:800;font-size:clamp(20px,2.4vw,26px);
+    background:linear-gradient(120deg,var(--pink),var(--lav));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .lbl{font-weight:700;color:var(--ink-soft);margin-top:6px;font-size:14px}
+
+  /* voice flow */
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:8px 0 30px}
+  .node{flex:1;min-width:130px;background:#fff;border-radius:18px;padding:16px 14px;text-align:center;
+    box-shadow:var(--shadow);border:2px solid rgba(255,255,255,.85);position:relative}
+  .node .t{font-family:"ZCOOL KuaiLe";font-size:17px;margin-bottom:4px}
+  .node .d{font-size:12.5px;color:var(--ink-soft);font-weight:600}
+  .node.mic{background:linear-gradient(120deg,#fff,#fdeaf5)}
+  .node.asr{background:linear-gradient(120deg,#fff,#eef6ff)}
+  .node.llm{background:linear-gradient(120deg,#fff,#f1ecff)}
+  .node.tts{background:linear-gradient(120deg,#fff,#eafaf3)}
+  .node.spk{background:linear-gradient(120deg,#fff,#fdeaf5)}
+  .arrow{display:flex;align-items:center;font-size:24px;color:var(--lav);font-weight:800}
+  @media(max-width:860px){.arrow{transform:rotate(90deg)}}
+
+  /* timeline */
+  .timeline{position:relative;margin-top:10px;padding-left:8px}
+  .timeline::before{content:"";position:absolute;left:26px;top:6px;bottom:6px;width:4px;
+    background:linear-gradient(var(--pink),var(--lav),var(--sky));border-radius:4px}
+  .tl-item{display:grid;grid-template-columns:54px 1fr;gap:18px;margin-bottom:20px;align-items:start}
+  .tl-dot{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;
+    background:linear-gradient(120deg,var(--pink),var(--lav));box-shadow:0 8px 18px rgba(184,156,255,.5);z-index:1;font-size:13px}
+  .tl-card{background:#fff;border-radius:20px;padding:16px 22px;box-shadow:var(--shadow);border:2px solid rgba(255,255,255,.85)}
+  .tl-card h4{font-family:"ZCOOL KuaiLe";font-size:18px;margin-bottom:4px}
+  .tl-card p{color:var(--ink-soft);font-weight:600;font-size:14.5px}
+
+  footer{text-align:center;padding:50px 24px 70px;color:var(--ink-soft);font-weight:600;position:relative;z-index:1}
+  footer .heart{color:var(--pink)}
+  .reveal{opacity:0;transform:translateY(28px);transition:.7s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="deco" style="top:12%;left:6%">✦</div>
+<div class="deco" style="top:22%;right:8%;animation-delay:1.5s">★</div>
+<div class="deco" style="top:60%;left:3%;animation-delay:2.5s">♡</div>
+<div class="deco" style="top:74%;right:5%;animation-delay:.8s">✿</div>
+<div class="deco" style="top:42%;right:14%;animation-delay:3s">✦</div>
+
+<nav>
+  <div class="brand"><span class="dot"></span><span class="i18n" data-zh="Smart Badge" data-en="Smart Badge">Smart Badge</span></div>
+  <div class="links">
+    <a href="#overview" class="i18n" data-zh="概览" data-en="Overview">概览</a>
+    <a href="#voice" class="i18n" data-zh="语音" data-en="Voice">语音</a>
+    <a href="#phases" class="i18n" data-zh="阶段" data-en="Phases">阶段</a>
+    <a href="#specs" class="i18n" data-zh="规格" data-en="Specs">规格</a>
+    <button class="lang-btn" id="langBtn">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <span class="eyebrow i18n" data-zh="2026 项目汇报" data-en="2026 Project Review">2026 项目汇报</span>
+    <h1><span class="i18n" data-zh="AI 智能吧唧" data-en="AI Living Badge">AI 智能吧唧</span></h1>
+    <p class="lead i18n" data-zh="让谷子“活”过来 —— 一枚可以佩戴的二次元 AI 陪伴徽章。" data-en="Make the acrylic standee come alive — a wearable anime AI companion badge.">让谷子“活”过来 —— 一枚可以佩戴的二次元 AI 陪伴徽章。</p>
+    <div class="chips">
+      <div class="chip"><span class="i18n" data-zh="阶段" data-en="Stage">阶段</span> <b class="i18n" data-zh="P1–P4" data-en="P1–P4">P1–P4</b></div>
+      <div class="chip"><span class="i18n" data-zh="形态" data-en="Form">形态</span> <b class="i18n" data-zh="可佩戴徽章" data-en="Wearable">可佩戴徽章</b></div>
+      <div class="chip"><span class="i18n" data-zh="语音" data-en="Voice">语音</span> <b class="i18n" data-zh="本地 ASR+TTS" data-en="Local ASR+TTS">本地 ASR+TTS</b></div>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#voice" class="i18n" data-zh="查看语音架构" data-en="See Voice Arch">查看语音架构</a>
+      <a class="btn ghost" href="#overview" class="i18n" data-zh="项目背景" data-en="Background">项目背景</a>
+    </div>
+  </div>
+  <div class="mascot">
+    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-label="badge mascot">
+      <defs>
+        <radialGradient id="bg2" cx="35%" cy="30%"><stop offset="0%" stop-color="#fff"/><stop offset="60%" stop-color="#ffd6ec"/><stop offset="100%" stop-color="#c9b6ff"/></radialGradient>
+      </defs>
+      <circle cx="160" cy="160" r="130" fill="url(#bg2)" stroke="#ff9ecd" stroke-width="6"/>
+      <circle cx="160" cy="160" r="130" fill="none" stroke="#fff" stroke-width="3" opacity=".7"/>
+      <path d="M160 38 l9 18 20 2 -14 14 3 20 -18 -10 -18 10 3 -20 -14 -14 20 -2 Z" fill="#fff3a8" stroke="#ffd166" stroke-width="2"/>
+      <circle cx="160" cy="158" r="92" fill="#fff"/>
+      <circle cx="126" cy="150" r="15" fill="#4a3f5e"/><circle cx="194" cy="150" r="15" fill="#4a3f5e"/>
+      <circle cx="131" cy="145" r="5" fill="#fff"/><circle cx="199" cy="145" r="5" fill="#fff"/>
+      <ellipse cx="108" cy="174" rx="14" ry="9" fill="#ff9ecd" opacity=".8"/>
+      <ellipse cx="212" cy="174" rx="14" ry="9" fill="#ff9ecd" opacity=".8"/>
+      <path d="M142 180 Q160 198 178 180" stroke="#ff7ab8" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview" class="reveal">
+  <span class="eyebrow i18n" data-zh="项目概览" data-en="Project Overview">项目概览</span>
+  <h2 class="i18n" data-zh="我们在做什么？" data-en="What are we building?">我们在做什么？</h2>
+  <p class="sub i18n" data-zh="一句话说清产品定位与核心命题——把下面的占位文字换成你自己的表述即可。" data-en="One-liner on positioning and the core proposition — swap the placeholder text with your own.">一句话说清产品定位与核心命题——把下面的占位文字换成你自己的表述即可。</p>
+  <div class="grid g3">
+    <div class="card"><div class="ic">🎀</div><h3 class="i18n" data-zh="产品定位" data-en="Positioning">产品定位</h3><p class="i18n" data-zh="可佩戴的二次元 AI 陪伴徽章：活在圆屏里，能看你、听你、陪你。" data-en="A wearable anime AI companion badge: alive in a round screen, sees you, hears you, stays with you.">可佩戴的二次元 AI 陪伴徽章：活在圆屏里，能看你、听你、陪你。</p></div>
+    <div class="card"><div class="ic">💫</div><h3 class="i18n" data-zh="核心命题" data-en="Core Idea">核心命题</h3><p class="i18n" data-zh="传统吧唧是“印着角色的铁皮”，我们要交付“角色本人住在里面”。" data-en="A normal badge is printed tin; we deliver the character actually living inside it.">传统吧唧是“印着角色的铁皮”，我们要交付“角色本人住在里面”。</p></div>
+    <div class="card"><div class="ic">🔌</div><h3 class="i18n" data-zh="离线优先" data-en="Offline-first">离线优先</h3><p class="i18n" data-zh="断网也有完整体验，联网后解锁 LLM 自由对话。" data-en="Full experience offline; networking unlocks free LLM conversation.">断网也有完整体验，联网后解锁 LLM 自由对话。</p></div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="voice" class="reveal">
+  <span class="eyebrow i18n" data-zh="语音交互" data-en="Voice Interaction">语音交互</span>
+  <h2 class="i18n" data-zh="让角色真正“开口”" data-en="Let the character speak">让角色真正“开口”</h2>
+  <p class="sub i18n" data-zh="语音子系统以 VOICE_INTERACTION.md 为权威规格：本地 ASR + 云端 LLM + 本地 TTS。开发板负责采集/播放/显示，Windows + RTX 5070 电脑负责推理。" data-en="The voice subsystem follows VOICE_INTERACTION.md: local ASR + cloud LLM + local TTS. The dev board captures/plays/displays; a Windows + RTX 5070 PC does the inference.">语音子系统以 VOICE_INTERACTION.md 为权威规格：本地 ASR + 云端 LLM + 本地 TTS。开发板负责采集/播放/显示，Windows + RTX 5070 电脑负责推理。</p>
+
+  <div class="flow">
+    <div class="node mic"><div class="t i18n" data-zh="🎤 麦克风" data-en="🎤 Mic">🎤 麦克风</div><div class="d i18n" data-zh="开发板采集语音" data-en="Board captures audio">开发板采集语音</div></div>
+    <div class="arrow">→</div>
+    <div class="node asr"><div class="t i18n" data-zh="🧠 本地 ASR" data-en="🧠 Local ASR">🧠 本地 ASR</div><div class="d i18n" data-zh="FunASR · RTX5070" data-en="FunASR · RTX5070">FunASR · RTX5070</div></div>
+    <div class="arrow">→</div>
+    <div class="node llm"><div class="t i18n" data-zh="💬 云端 LLM" data-en="💬 Cloud LLM">💬 云端 LLM</div><div class="d i18n" data-zh="角色卡驱动回复" data-en="Character-card reply">角色卡驱动回复</div></div>
+    <div class="arrow">→</div>
+    <div class="node tts"><div class="t i18n" data-zh="🔊 本地 TTS" data-en="🔊 Local TTS">🔊 本地 TTS</div><div class="d i18n" data-zh="CosyVoice 3.0" data-en="CosyVoice 3.0">CosyVoice 3.0</div></div>
+    <div class="arrow">→</div>
+    <div class="node spk"><div class="t i18n" data-zh="📣 扬声器" data-en="📣 Speaker">📣 扬声器</div><div class="d i18n" data-zh="开发板播放" data-en="Board plays back">开发板播放</div></div>
+  </div>
+
+  <div class="grid g3">
+    <div class="card"><div class="ic">🧠</div><h3 class="i18n" data-zh="本地 ASR" data-en="Local ASR">本地 ASR</h3><p class="i18n" data-zh="FunASR Paraformer 中文识别，运行于电脑端 RTX 5070，离线可用，不调用云端 ASR。" data-en="FunASR Paraformer Chinese recognition on the local RTX 5070; works offline, no cloud ASR.">FunASR Paraformer 中文识别，运行于电脑端 RTX 5070，离线可用，不调用云端 ASR。</p></div>
+    <div class="card"><div class="ic">💬</div><h3 class="i18n" data-zh="云端 LLM" data-en="Cloud LLM">云端 LLM</h3><p class="i18n" data-zh="经云端 API 调用，角色卡 + 对话历史约束回复；密钥不进固件/日志。" data-en="Called via cloud API; character card + history shape replies; keys never touch firmware/logs.">经云端 API 调用，角色卡 + 对话历史约束回复；密钥不进固件/日志。</p></div>
+    <div class="card"><div class="ic">🔊</div><h3 class="i18n" data-zh="本地 TTS" data-en="Local TTS">本地 TTS</h3><p class="i18n" data-zh="CosyVoice 3.0（GPT-SoVITS 备选），HTTP API，仅监听回环地址，不回退云端。" data-en="CosyVoice 3.0 (GPT-SoVITS fallback), HTTP API, loopback-only, never silently falls back to cloud.">CosyVoice 3.0（GPT-SoVITS 备选），HTTP API，仅监听回环地址，不回退云端。</p></div>
+    <div class="card"><div class="ic">📡</div><h3 class="i18n" data-zh="通信协议" data-en="Protocol">通信协议</h3><p class="i18n" data-zh="WebSocket 半双工双向通信，17 种消息类型，按 session/turn 区分轮次。" data-en="WebSocket half-duplex duplex; 17 message types; sessions/turns keep rounds separate.">WebSocket 半双工双向通信，17 种消息类型，按 session/turn 区分轮次。</p></div>
+    <div class="card"><div class="ic">📇</div><h3 class="i18n" data-zh="角色卡系统" data-en="Character Cards">角色卡系统</h3><p class="i18n" data-zh="YAML/JSON 与代码分离，30+ 字段约束性格、措辞、音色与禁止行为。" data-en="YAML/JSON decoupled from code; 30+ fields govern personality, wording, voice and forbids.">YAML/JSON 与代码分离，30+ 字段约束性格、措辞、音色与禁止行为。</p></div>
+    <div class="card"><div class="ic">🔋</div><h3 class="i18n" data-zh="开发板" data-en="Dev Board">开发板</h3><p class="i18n" data-zh="ESP32-S3-Touch-LCD-1.85B：360×360 屏、双麦、扬声器、IMU、WiFi/BLE。" data-en="ESP32-S3-Touch-LCD-1.85B: 360×360 screen, dual mic, speaker, IMU, WiFi/BLE.">ESP32-S3-Touch-LCD-1.85B：360×360 屏、双麦、扬声器、IMU、WiFi/BLE。</p></div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section id="phases" class="reveal">
+  <span class="eyebrow i18n" data-zh="开发阶段" data-en="Dev Phases">开发阶段</span>
+  <h2 class="i18n" data-zh="七步走通语音闭环" data-en="Seven steps to a voice loop">七步走通语音闭环</h2>
+  <p class="sub i18n" data-zh="严格分阶段实施，每个阶段先验收再进入下一阶段，不一次性生成大量未验证代码。" data-en="Strictly phased: validate each stage before the next; never generate large unverified code at once.">严格分阶段实施，每个阶段先验收再进入下一阶段，不一次性生成大量未验证代码。</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段一" data-en="S1">阶段一</div><div class="tl-card"><h4 class="i18n" data-zh="本地 ASR 验证" data-en="Local ASR Verify">本地 ASR 验证</h4><p class="i18n" data-zh="环境检查 + 独立虚拟环境 + FunASR Paraformer 中文识别，建立性能基线。" data-en="Env check + venv + FunASR Paraformer Chinese recognition; build a perf baseline.">环境检查 + 独立虚拟环境 + FunASR Paraformer 中文识别，建立性能基线。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段二" data-en="S2">阶段二</div><div class="tl-card"><h4 class="i18n" data-zh="云端 LLM 验证" data-en="Cloud LLM Verify">云端 LLM 验证</h4><p class="i18n" data-zh="统一 LLM 客户端封装，测试角色卡遵循、首 token 延迟与限流处理。" data-en="Unified LLM client; test character adherence, first-token latency and rate limits.">统一 LLM 客户端封装，测试角色卡遵循、首 token 延迟与限流处理。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段三" data-en="S3">阶段三</div><div class="tl-card"><h4 class="i18n" data-zh="本地 TTS + 对话服务" data-en="Local TTS + Chat">本地 TTS + 对话服务</h4><p class="i18n" data-zh="评估 CosyVoice 3.0，建本地 TTS HTTP 接口，接通 ASR+LLM+TTS 最简闭环。" data-en="Eval CosyVoice 3.0, build local TTS HTTP API, wire ASR+LLM+TTS minimal loop.">评估 CosyVoice 3.0，建本地 TTS HTTP 接口，接通 ASR+LLM+TTS 最简闭环。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段四" data-en="S4">阶段四</div><div class="tl-card"><h4 class="i18n" data-zh="WebSocket 通信" data-en="WebSocket Comms">WebSocket 通信</h4><p class="i18n" data-zh="定义统一消息协议，完成客户端模拟器，测试上传/下发/中断/重连。" data-en="Define the protocol, build a client simulator; test upload/download/cancel/reconnect.">定义统一消息协议，完成客户端模拟器，测试上传/下发/中断/重连。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段五" data-en="S5">阶段五</div><div class="tl-card"><h4 class="i18n" data-zh="ESP32-S3 固件" data-en="ESP32-S3 Firmware">ESP32-S3 固件</h4><p class="i18n" data-zh="Wi-Fi 连接、麦克风采集、按键、音频播放、WebSocket 与 LCD 状态显示。" data-en="WiFi, mic capture, buttons, audio playback, WebSocket and LCD status.">Wi-Fi 连接、麦克风采集、按键、音频播放、WebSocket 与 LCD 状态显示。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段六" data-en="S6">阶段六</div><div class="tl-card"><h4 class="i18n" data-zh="整机联调" data-en="System Integration">整机联调</h4><p class="i18n" data-zh="从录音到播放完整跑通，测多轮对话、网络中断与服务异常，记录延迟。" data-en="End-to-end from record to playback; test multi-turn, network loss, service faults; log latency.">从录音到播放完整跑通，测多轮对话、网络中断与服务异常，记录延迟。</p></div></div>
+    <div class="tl-item"><div class="tl-dot i18n" data-zh="阶段七" data-en="S7">阶段七</div><div class="tl-card"><h4 class="i18n" data-zh="稳定性与性能优化" data-en="Stability & Tuning">稳定性与性能优化</h4><p class="i18n" data-zh="依真实数据优化模型与参数，评估流式 ASR/LLM/TTS，查显存与长稳。" data-en="Tune models on real data; eval streaming ASR/LLM/TTS; check VRAM and long-run stability.">依真实数据优化模型与参数，评估流式 ASR/LLM/TTS，查显存与长稳。</p></div></div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section id="specs" class="reveal">
+  <span class="eyebrow i18n" data-zh="核心规格" data-en="Core Specs">核心规格</span>
+  <h2 class="i18n" data-zh="关键参数一览" data-en="Key Parameters">关键参数一览</h2>
+  <div class="grid g4">
+    <div class="card kpi"><div class="num i18n" data-zh="ESP32-S3R8" data-en="ESP32-S3R8">ESP32-S3R8</div><div class="lbl i18n" data-zh="双核 240MHz · 8MB PSRAM" data-en="Dual-core · 8MB PSRAM">双核 240MHz · 8MB PSRAM</div></div>
+    <div class="card kpi"><div class="num i18n" data-zh="1.85″ 360×360" data-en="1.85″ 360×360">1.85″ 360×360</div><div class="lbl i18n" data-zh="QSPI 电容触摸屏" data-en="QSPI touch LCD">QSPI 电容触摸屏</div></div>
+    <div class="card kpi"><div class="num i18n" data-zh="双麦 + ES8311" data-en="Dual Mic + ES8311">双麦 + ES8311</div><div class="lbl i18n" data-zh="16kHz 采集 / 24kHz 播放" data-en="16k capture / 24k play">16kHz 采集 / 24kHz 播放</div></div>
+    <div class="card kpi"><div class="num i18n" data-zh="WiFi + BLE" data-en="WiFi + BLE">WiFi + BLE</div><div class="lbl i18n" data-zh="OTA · 配网 · 云端 AI" data-en="OTA · Pairing · Cloud AI">OTA · 配网 · 云端 AI</div></div>
+  </div>
+</section>
+
+<footer>
+  <p class="i18n" data-zh="让每一枚吧唧，都住进一个活着的角色 ✨" data-en="May every badge house a living character ✨">让每一枚吧唧，都住进一个活着的角色 ✨</p>
+  <p style="margin-top:8px;font-size:13px">Smart Badge · AI 智能吧唧 · 2026 Project Review · <span class="heart">♡</span> made with WorkBuddy</p>
+</footer>
+
+<script>
+  var lang = 'zh';
+  var btn = document.getElementById('langBtn');
+  function applyLang(){
+    document.querySelectorAll('.i18n').forEach(function(el){ el.textContent = el.getAttribute('data-' + lang); });
+    btn.textContent = (lang === 'zh') ? 'EN' : '中';
+    document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+  }
+  btn.addEventListener('click', function(){ lang = (lang === 'zh') ? 'en' : 'zh'; applyLang(); });
+  applyLang();
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
